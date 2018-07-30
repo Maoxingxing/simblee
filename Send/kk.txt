@@ -1,0 +1,53 @@
+/*
+ * Copyright (c) 2015 RF Digital Corp. All Rights Reserved.
+ *
+ * The source code contained in this file and all intellectual property embodied in
+ * or covering the source code is the property of RF Digital Corp. or its licensors.
+ * Your right to use this source code and intellectual property is non-transferable,
+ * non-sub licensable, revocable, and subject to terms and conditions of the
+ * SIMBLEE SOFTWARE LICENSE AGREEMENT.
+ * http://www.simblee.com/licenses/SimbleeSoftwareLicenseAgreement.txt
+ *
+ * THE SOURCE CODE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND.
+ *
+ * This heading must NOT be removed from this file.
+ */
+
+#include "SimbleeCOM.h"
+
+char tempBag[8]={0};
+void setup() {
+//  SimbleeCOM.begin();
+  Serial.begin(57600);
+}
+
+
+/*void loop() {
+  if (Serial.available() >= 8)
+  {
+    for(char i=0;i<8;i++)Serial.write(Serial.read());
+    
+   }
+*/
+void loop() {
+  if (Serial.available() >= 8)
+  {
+//    char * tempBagPtr= (char *) &tempBag;
+    uint8_t i=0;
+    while (i<8)
+      {  
+         tempBag[i] = Serial.read();
+         Serial.write(tempBag[i]);
+         SimbleeCOM.send(&tempBag[i++], 1);
+      }         
+    //if(tempBag[0]==0xAA && tempBag[1]==0xAA)//tempBag[0]==0xAA && tempBag[1]==0xAA(short) *tempBag==0xAAAA
+    //  {
+     
+     // SimbleeCOM.send(tempBag, 8);
+    //   }
+
+    delay(10);
+  }
+
+  
+}
