@@ -6,6 +6,6 @@ void setup() {
 
 void loop() {
   SimbleeBLE.send("kkxxkkxx",8);
-  delay(10);
+  delay(300);
 }
 
